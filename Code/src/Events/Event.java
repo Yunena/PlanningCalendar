@@ -1,5 +1,9 @@
 package Events;
 
+import org.json.JSONObject;
+
+import java.io.File;
+
 public class Event {
     String name;
     int type;
@@ -7,8 +11,18 @@ public class Event {
     Date endDate;
     int repeatCycle;
     boolean isDone = false;
+    private String planPath = "planning.json";
 
     public void setFlag(){
         this.isDone = true;
+    }
+
+    public void toJson(Date date){
+        if(type==TypeList.Planningtype){
+            File file = new File(planPath);
+            JSONObject js = new JSONObject();
+            if(file.exists()){
+            }
+        }
     }
 }

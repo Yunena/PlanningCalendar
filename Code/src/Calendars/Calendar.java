@@ -53,16 +53,16 @@ public class Calendar {
             }
             if(k==monthday) break;
         }
-        /*for(int[] nums:monthCalendar){
+        for(int[] nums:monthCalendar){
             System.out.println(Arrays.toString(nums));
-        }*/
+        }
         return monthCalendar;
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         Calendar ca = new Calendar();
         //ca.getCurrentDate();
         ca.getCalendar(2020,2);
-    }
+    }*/
 
 }
