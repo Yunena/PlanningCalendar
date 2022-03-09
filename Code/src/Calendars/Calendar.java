@@ -12,7 +12,7 @@ public class Calendar {
     private int searchWeek;
     private int[] monthdays = {31,31,28,31,30,31,30,31,31,30,31,30,31};
 
-    public void getCurrentDate(){
+    public Date getCurrentDate(){
         java.util.Date date = new java.util.Date();
         SimpleDateFormat sdf = new SimpleDateFormat();
         sdf.applyPattern("yyyy");
@@ -22,6 +22,7 @@ public class Calendar {
         sdf.applyPattern("dd");
         int day = Integer.parseInt(sdf.format(date));
         this.currentDate = new Date(year,month,day);
+        return this.currentDate;
     }
 
     public int[][] getCalendar(int year, int month){//1900.1.1 Mon
@@ -53,9 +54,9 @@ public class Calendar {
             }
             if(k==monthday) break;
         }
-        for(int[] nums:monthCalendar){
+        /*for(int[] nums:monthCalendar){
             System.out.println(Arrays.toString(nums));
-        }
+        }*/
         return monthCalendar;
     }
 

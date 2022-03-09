@@ -24,6 +24,10 @@ public class Date {
         return alljso;
     }
 
+    public String toString(){
+        return this.year+"-"+this.month+"-"+this.day;
+    }
+
     /*public static void main(String[] args) {
         Date date = new Date(2022,3,6);
         System.out.println(date.toJson());

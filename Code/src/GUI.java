@@ -1,4 +1,5 @@
 import Calendars.Calendar;
+import Events.Date;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -67,13 +68,13 @@ public class GUI {
         add(button36);add(button37);add(button38);add(button39);add(button40);add(button41);add(button42);
     }
     };
+    public Date date;
 
 
 
-    public void searchForCalendar(GUI gui){
+    public void searchForCalendar(GUI gui,CalendarController calc){
 
         JButton jb = gui.searchButton;
-        CalendarController calc = new CalendarController(new Calendar());
         JComboBox jc = gui.comboBox2;
         jc.addActionListener(new ActionListener() {
             @Override
@@ -107,25 +108,36 @@ public class GUI {
 
     }
 
-    public void showPlanning(GUI gui){
+    public void addPlanning(GUI gui){
         JButton addjb = gui.addButton;
         addjb.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String str = gui.eventLabel.getText();
-                gui.eventLabel.setText(gui.textField1.getText());
+                String str = gui.textField1.getText();
+                EventController.savePlanningType(EventController.updatePlanningType(EventController.getPlanningType(),gui.date.toString(),str));
+                //gui.eventLabel.setText(gui.textField1.getText());
+                gui.eventLabel.setText(EventController.showPlaningType(gui.date.toString()));
                 gui.textField1.setText("");
             }
         });
     }
 
     public static void main(String[] args) {
-        ///CalendarController calc = new CalendarController(new Calendar());
+        CalendarController calc = new CalendarController(new Calendar());
         GUI gui=new GUI();
-        gui.searchForCalendar(gui);
-        gui.showPlanning(gui);
+        Date cd = calc.calendar.getCurrentDate();
+        gui.comboBox1.setSelectedIndex(cd.year-Integer.parseInt(String.valueOf(gui.comboBox1.getItemAt(0))));
+        gui.comboBox2.setSelectedIndex(cd.month-1);
+        calc.calendar2GUI(cd.year,cd.month,gui);
+        gui.searchForCalendar(gui,calc);
+        gui.dateLabel.setText(cd.month+"月"+cd.day+"日");
+        gui.eventLabel.setText(EventController.showPlaningType(cd.toString()));
+        gui.date = cd;
+        gui.addPlanning(gui);
+
+
         //calc.calendar2GUI(2022,3,gui);
-        JFrame frame = new JFrame("test");
+        JFrame frame = new JFrame("PlanningCalendar");
         //frame.setSize(300, 300);
         frame.setContentPane(gui.panel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

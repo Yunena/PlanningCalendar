@@ -1,4 +1,5 @@
 import Calendars.Calendar;
+import Events.Date;
 
 import javax.swing.*;
 import java.awt.*;
@@ -34,7 +35,7 @@ public class CalendarController {
                 //jb.setPressedIcon(new ImageIcon("D:\\JavaProjects\\PlanningCalendar\\img\\pic2.png"));
                 //jb.setText(String.valueOf(calendarArray[i][j]));
                 jb.setContentAreaFilled(false);
-                String path = "D:\\JavaProjects\\PlanningCalendar\\Code\\src\\img\\NotPress\\"+calendarArray[i][j]+".png";
+                String path = "src\\img\\NotPress\\"+calendarArray[i][j]+".png";
                 //System.out.println(path);
                 jb.setIcon(new ImageIcon(path));
                 jb.setPressedIcon(new ImageIcon(path));
@@ -42,9 +43,10 @@ public class CalendarController {
                 this.es[i][j] = new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        System.out.println(month+" "+calendarArray[i][j]);
+                        //System.out.println(month+" "+calendarArray[i][j]);
                         gui.dateLabel.setText(month+"月"+calendarArray[i][j]+"日");
-                        gui.eventLabel.setText("今日无事");
+                        gui.date = new Date(year,month,calendarArray[i][j]);
+                        gui.eventLabel.setText(EventController.showPlaningType(gui.date.toString()));
                     }
                 };
                 jb.addActionListener(this.es[i][j]);
